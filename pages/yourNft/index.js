@@ -1,17 +1,18 @@
 import React,{useEffect,useState} from 'react'
 import Player from '../../components/player'
-import equals from "../../assests/Pictures/Ed-Sheeran-Equals.webp"
+import equals from "../../assests/Pictures/Ed-Sheeran-Equals.webp";
 import { collection, onSnapshot, doc,getDocs,query, orderBy, limit, updateDoc,addDoc  } from 'firebase/firestore'
-import {BidderState,BidOutcomeState,TimeoutState} from '../../recoilState/globalState';
+import {BidderState,BidOutcomeState,TimeoutState} from '../../utility/recoilState/globalState';
 import { db } from '../../firebase/fireabse.util'
 import { useRecoilValue } from 'recoil'
 import { Oval } from  'react-loader-spinner'
 
 
 export default function YourNft() {
-  const [ArrayNft,ArraysetNft] =useState([])
-  const [nft,setNft]=useState({})
-  const timeout=useRecoilValue(TimeoutState )
+  const [ ArrayNft, ArraysetNft ] = useState([])
+  const [ nft, setNft ] = useState({})
+  
+  const timeout = useRecoilValue(TimeoutState )
   const Bids=useRecoilValue(BidderState)
   const Outcome=useRecoilValue(BidOutcomeState)
 

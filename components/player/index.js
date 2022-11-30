@@ -2,7 +2,7 @@ import React, { useRef,useState } from 'react';
 import discImg from "../../assests/Pictures/img.png"
 import spiningDisc from "../../assests/Pictures/spinning disc.gif"
 
-import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill,BsFillSkipEndCircleFill} from 'react-icons/bs';
+import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 
 export default function Player({songName}) {
   const [playing,setPlaying]=useState(false)

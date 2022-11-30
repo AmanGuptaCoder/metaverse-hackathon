@@ -4,48 +4,48 @@ import equals from "../../assests/Pictures/Ed-Sheeran-Equals.webp"
 import { useLocation,useParams} from "react-router-dom";
 import { loadStdlib } from '@reach-sh/stdlib';
 import * as backend from '../../reach-app/build/index.main.mjs'
-import { AccountState} from '../../recoilState/globalState';
+import { AccountState} from '../../utility/recoilState/globalState';
 import { useRecoilValue,useRecoilState } from 'recoil';
 import Modal from '../../components/modal'
 import {AiOutlineCloseCircle} from "react-icons/ai"
 import {RiAuctionFill} from "react-icons/ri"
 import { BsConeStriped } from 'react-icons/bs';
 
-const reach = loadStdlib('ALGO');
+// const reach = loadStdlib('ALGO');
 
 export default function Bid() {
 
-  const location =useLocation()
-  const [locationState,setlocationState] = useState(location.state)
+  const location = useLocation()
+  const [locationState, setlocationState] = useState(location.state)
 
   const connectedCtc = useRef();
 
   const [trigger,setTrigger] =useState(false)
-  const account =useRecoilValue(AccountState)
-  const [ctcInfo,setctcInfo]=useState({})
-  const [hasAttach,setHasAttach] =useState(false)
-  const [hasBidded,setBidded]=useState(false)
-  const  [bid,setBid]=useState("")
-  const [outcome,setOutcome]=useState("")
-  const attach=async (contractInfo) => {
+  const account = useRecoilValue(AccountState)
+  const [ctcInfo, setctcInfo]=useState({})
+  const [hasAttach, setHasAttach] =useState(false)
+  const [hasBidded, setBidded]=useState(false)
+  const [ bid, setBid ] = useState("")
+  const [ outcome, setOutcome ]=useState("")
+  // const attach=async (contractInfo) => {
      
-    connectedCtc.current = account.contract(backend, JSON.parse(contractInfo));
-    //console.log(connectedCtc.current)
-    const nftId = await connectedCtc.current.apis.Bidder.optIn();
-    await account.tokenAccept(nftId);
+  //   connectedCtc.current = account.contract(backend, JSON.parse(contractInfo));
+  //   //console.log(connectedCtc.current)
+  //   const nftId = await connectedCtc.current.apis.Bidder.optIn();
+  //   await account.tokenAccept(nftId);
 
-    setHasAttach(true)
-    }
+  //   setHasAttach(true)
+  //   }
 
     const submit=async()=>{
       try{
-        const [lastBidder,lastBid] = await  connectedCtc.current.apis.Bidder.bid(reach.parseCurrency(Number(bid)))
-        console.log(lastBid,lastBidder,"eafhaebh")
-        if(bid >lastBid){
-          setOutcome(`You out bid ${lastBidder} who bidded ${reach.formatCurrency(Number(lastBid))}`)
-        }else{
-          setOutcome(`You bid was less than last bid,${reach.formatCurrency(Number(lastBid))} Algo`)
-        }
+        // const [lastBidder,lastBid] = await  connectedCtc.current.apis.Bidder.bid(reach.parseCurrency(Number(bid)))
+        // console.log(lastBid,lastBidder,"eafhaebh")
+        // if(bid >lastBid){
+        //   setOutcome(`You out bid ${lastBidder} who bidded ${reach.formatCurrency(Number(lastBid))}`)
+        // }else{
+        //   setOutcome(`You bid was less than last bid,${reach.formatCurrency(Number(lastBid))} Algo`)
+        // }
        
       }catch(e){
          console.log(e)
@@ -56,9 +56,9 @@ export default function Bid() {
     }
 
     const ok=()=>{
-      setHasAttach(false)
+      // setHasAttach(false)
 
-       setTrigger(false)
+      setTrigger(false)
   }
 
   return (

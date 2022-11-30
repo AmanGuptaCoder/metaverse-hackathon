@@ -17,19 +17,9 @@ import { NavLink } from "react-router-dom"
 import { deploy } from './deploy';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRecoilValue,useRecoilState } from 'recoil';
-import { AccountState,BidderState,BidOutcomeState,TimeoutState} from '../../recoilState/globalState';
+import { AccountState,BidderState,BidOutcomeState,TimeoutState} from '../../utility/recoilState/globalState';
 import ViewNftModal from '../../components/ViewNftModal';
 
-/**
- * @Note NFTCreatorView expects a prop which is of type function.
- *        It should contain logic that exits this page when clicked.
- *        It should be declared in the child component where this component
- *          is invoked.
- * 
- *  @dev - Perhaps { Scapula}
- *    @notice : You can access form data very easily from the submit button
- *                handler. That's why I console log it. 
- */
 export default function CreatNft({ exitCreatorView }) {
   const [formdata, setInputData] = React.useState({});
   const [display, setdisplay] = React.useState(false);

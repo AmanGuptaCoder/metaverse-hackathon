@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react'
-import discImg from "../../assests/Pictures/img.png"
+import discImg from "../../assests/Pictures/img.png";
 import { collection, onSnapshot, doc,getDocs,query, orderBy, limit } from 'firebase/firestore'
 import { db } from '../../firebase/fireabse.util'
 import { Link } from 'react-router-dom'
@@ -9,9 +9,9 @@ const styled = {
   "&:hover" : { transition: '0.2s ease-in-out', fontSize: '1em', background: 'grey'}
 }
 export default function Collection() {
-  const [collections,setCollections]=useState([1,2,3,4,5,6])
-  const [collectionNft,setCollection] =useState([])
-  const [nft,setNft]=useState({})
+  const [ collections, setCollections ] = useState([1,2,3,4,5,6])
+  const [ collectionNft, setCollection ] = useState([])
+  const [ nft, setNft ] = useState({})
 
   useEffect(()=>{
     const getNft=async()=>{
@@ -19,8 +19,8 @@ export default function Collection() {
       const querySnapshot = await getDocs(q);
       const nfts=[]
       querySnapshot.docs.map((doc)=>{
-         nfts.push({...doc.data(),id:doc.id})
-         setNft({...doc.data(),id:doc.id})
+         nfts.push({...doc.data(), id:doc.id})
+         setNft({...doc.data(), id:doc.id})
 
          
        })
