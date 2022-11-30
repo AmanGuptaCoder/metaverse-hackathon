@@ -1,24 +1,23 @@
 import React,{useEffect,useState} from 'react'
 import Player from '../../components/player'
-import equals from "../../assests/Pictures/Ed-Sheeran-Equals.webp";
-import { collection, onSnapshot, doc,getDocs,query, orderBy, limit, updateDoc,addDoc  } from 'firebase/firestore'
+// import equals from "../../assets/Pictures/Ed-Sheeran-Equals.webp";
+import { collection, onSnapshot, doc,getDocs,query, orderBy, limit, updateDoc,addDoc, DocumentData  } from 'firebase/firestore'
 import {BidderState,BidOutcomeState,TimeoutState} from '../../utility/recoilState/globalState';
-import { db } from '../../firebase/fireabse.util'
+import { db } from '../../utility/firebase/fireabse.util'
 import { useRecoilValue } from 'recoil'
 import { Oval } from  'react-loader-spinner'
 
 
 export default function YourNft() {
-  const [ ArrayNft, ArraysetNft ] = useState([])
-  const [ nft, setNft ] = useState({})
+  const [ ArrayNft, ArraysetNft ] = useState(Array<DocumentData>)
+  const [ nft, setNft ] = useState(Object);
   
   const timeout = useRecoilValue(TimeoutState )
-  const Bids=useRecoilValue(BidderState)
-  const Outcome=useRecoilValue(BidOutcomeState)
+  const Bids = useRecoilValue(BidderState)
+  const Outcome = useRecoilValue(BidOutcomeState)
 
 
   useEffect(()=>{
-   
     const getNft=async()=>{
        const q = query(collection(db, "Nfts"), orderBy("date", "desc"), limit(1));
        const querySnapshot = await getDocs(q);
@@ -30,8 +29,7 @@ export default function YourNft() {
         })
       // setproposal( querySnapshot.docs)
     }
-
-    getNft()
+    getNft();
 },[])
 
 const broadCast=async()=>{
@@ -80,13 +78,13 @@ const broadCast=async()=>{
                    <main className='flex flex-col'>
                     <h5 className='text-lg text-slate-600 '>Bids</h5>
                     <div className='grid grid-flow-row grid-cols-2 gap-x-8 gap-y-10 px-16 py-6'>
-                      {Bids.length>0&&
+                      {Bids.length > 0 &&
                         <>
                         {Bids.map((bid)=>{
                           return(
                             <div className='flex flex-col justify-center'>
-                                 <h5 className='text-sm'>{bid.address.slice(0,9)+"..."}</h5>
-                                 <h5 className='text-sm px-4'>{bid.amount}</h5>
+                                 {/* <h5 className='text-sm'>{bid.address.slice(0,9)+"..."}</h5> */}
+                                 {/* <h5 className='text-sm px-4'>{bid.amount}</h5> */}
                             </div>
                           )
                         })}

@@ -13,14 +13,15 @@ import Tooltip from '@mui/material/Tooltip';
 import Container from '@mui/material/Container';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import { NavLink } from "react-router-dom"
-import { deploy } from './deploy';
+// import { NavLink } from "react-router-dom"
+import Link from "@mui/material/Link";
+// import { deploy } from './deploy';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { useRecoilValue,useRecoilState } from 'recoil';
 import { AccountState,BidderState,BidOutcomeState,TimeoutState} from '../../utility/recoilState/globalState';
 import ViewNftModal from '../../components/ViewNftModal';
 
-export default function CreatNft({ exitCreatorView }) {
+export default function CreatNft({ exitCreatorView }: any) {
   const [formdata, setInputData] = React.useState({});
   const [display, setdisplay] = React.useState(false);
   const account = useRecoilValue(AccountState)
@@ -36,35 +37,37 @@ export default function CreatNft({ exitCreatorView }) {
   const [showView, setview] = useState(false)
   const audioNFT = useRef();
 
-  const setDisplay = (value) => setdisplay(value);
+  const setDisplay = (value: boolean | ((prevState: boolean) => boolean)) => setdisplay(value);
   
-  const setReady = (value) => setready(value);
+  const setReady = (value: React.SetStateAction<string>) => setready(value);
 
-  const setctcInfo = (value) => setctcinfo(value);
+  const setctcInfo = (value: React.SetStateAction<string>) => setctcinfo(value);
 
-  const setOutcome = (value) => setoutcome(value);
+  const setOutcome = (value: string | ((currVal: string) => string)) => setoutcome(value);
   
-  const setTimeOut = (value) => settimeOut(value);
+  const setTimeOut = (value: string | ((currVal: string) => string)) => settimeOut(value);
   
-  const setArrayctcInfo = (value) => setarrayctcInfo(value);
+  const setArrayctcInfo = (value: React.SetStateAction<never[]>) => setarrayctcInfo(value);
   
-  const setDeadline = (value) => setdeadline(value);
+  const setDeadline = (value: React.SetStateAction<string>) => setdeadline(value);
 
-  const setTrigger = (value) => settrigger(value);
+  const setTrigger = (value: boolean | ((prevState: boolean) => boolean)) => settrigger(value);
   
-  const setErrorMsg = (value) => seterrorMsg(value);
+  const setErrorMsg = (value: React.SetStateAction<string>) => seterrorMsg(value);
   
-  const clearInputData = (value) => setInputData(value);
+  const clearInputData = (value: React.SetStateAction<{}>) => setInputData(value);
 
-  const setView = (value) => setview(value);
+  const setView = (value: boolean | ((prevState: boolean) => boolean)) => setview(value);
 
   const handleClose = () => settrigger(false);
 
-  const { deployContract, addToCollection } = deploy;
-  
-  const setIData = (value) => setInputData(value);
+  // const { deployContract, addToCollection } = deploy;
 
-  const handleSubmission = (event) => {
+  const addToCollection = () => {};
+  
+  const setIData = (value: React.SetStateAction<{}>) => setInputData(value);
+
+  const handleSubmission = (event: { preventDefault: () => void; currentTarget: HTMLFormElement | undefined; }) => {
     setDisplay(true);
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -78,21 +81,21 @@ export default function CreatNft({ exitCreatorView }) {
     setIData(iData);
 
     console.log(formdata);
-    deployContract({
-      options: {
-        audioNFT: audioNFT, 
-        setReady: setReady, 
-        auctionReady: auctionReady, 
-        setBids: setBids, 
-        setOutcome: setOutcome, 
-        setTimeOut: setTimeOut, 
-        deadline: deadline,
-        setTrigger: setTrigger,
-        setErrorMsg: setErrorMsg,
-        setArrayctcInfo: setArrayctcInfo,
-        clearInputData: clearInputData,
-        setctcInfo: setctcInfo
-      }});
+    // deployContract({
+    //   options: {
+    //     audioNFT: audioNFT, 
+    //     setReady: setReady, 
+    //     auctionReady: auctionReady, 
+    //     setBids: setBids, 
+    //     setOutcome: setOutcome, 
+    //     setTimeOut: setTimeOut, 
+    //     deadline: deadline,
+    //     setTrigger: setTrigger,
+    //     setErrorMsg: setErrorMsg,
+    //     setArrayctcInfo: setArrayctcInfo,
+    //     clearInputData: clearInputData,
+    //     setctcInfo: setctcInfo
+    //   }});
   };
   // console.log(formdata);
 
@@ -105,11 +108,11 @@ export default function CreatNft({ exitCreatorView }) {
             <CssBaseline />
               <Box  sx={{marginTop: 8, display: 'flex', flexDirection: 'column', alignItems: 'center',}}>
                 <Tooltip title='Cancel' sx={{cursor: 'pointer'}}>
-                  <NavLink to='/' onClick={ exitCreatorView } sx={{cursor: 'pointer'}}>
+                  <Link href='/' onClick={ exitCreatorView } sx={{cursor: 'pointer'}}>
                     <Avatar sx={{m: 1, background: 'purple', "&:hover": {background: 'purple'}}}>
                       <CancelRounded />
                     </Avatar>
-                  </NavLink>
+                  </Link>
                 </Tooltip>
                 <Typography component="h1" variant="h5">
                   Create an Auction
@@ -211,7 +214,7 @@ export default function CreatNft({ exitCreatorView }) {
                     Creating your copyright ...
                   </LoadingButton>
                 }
-                  {showView? <NavLink to='/yournft'><Button variant='contained' sx={{width: '100%', background: 'teal'}}>View NFT</Button></NavLink> : null}
+                  {showView? <Link href='/yournft'><Button variant='contained' sx={{width: '100%', background: 'teal'}}>View NFT</Button></Link> : null}
                 </Box>
               </Box>
             </CardContent>

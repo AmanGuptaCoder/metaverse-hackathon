@@ -10,10 +10,11 @@ import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import ConnectAccount from '../connectAccount'
 import MenuItem from '@mui/material/MenuItem';
-import { NavLink } from "react-router-dom"
+// import { NavLink } from "react-router-dom"
+import Link from 'next/link';
 
-const pages = ['Home', 'Explore collections', 'Create'];
-const destination = ['/', '/collections', '/createnft'];
+const pages = ['Home', 'Explore collections', 'Create', 'My Collections', 'Bid'];
+const destination = ['/', '/collections', '/createnft', '/yourNft', './bid/:id'];
 
 function Header () {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -73,9 +74,9 @@ function Header () {
             >
               {pages.map((page, id) => (
                 <MenuItem key={id}>
-                  <NavLink  className="btn" to={destination[id]} style={{border: 'none'}}>
+                  <Link  className="btn" href={destination[id]} style={{border: 'none'}}>
                     <Typography textAlign="center" sx={{color: 'purple',}}>{page}</Typography>
-                  </NavLink>
+                  </Link>
                 </MenuItem>
               ))}
             </Menu>
@@ -102,9 +103,9 @@ function Header () {
             {
               pages.map((page, id) => (
                 <Button key={id}>
-                  <NavLink to={destination[id]} >
+                  <Link href={destination[id]} >
                     <Typography textAlign="center" sx={{color: 'purple',}}>{page}</Typography>
-                  </NavLink>
+                  </Link>
                 </Button>
             ))}
           </Box>

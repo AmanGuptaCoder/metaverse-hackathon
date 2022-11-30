@@ -1,8 +1,8 @@
 import React,{useState,useEffect} from 'react'
-import discImg from "../../assests/Pictures/img.png";
-import { collection, onSnapshot, doc,getDocs,query, orderBy, limit } from 'firebase/firestore'
-import { db } from '../../firebase/fireabse.util'
-import { Link } from 'react-router-dom'
+// import discImg from "../../assets/Pictures/img.png";
+import { collection, onSnapshot, doc,getDocs,query, orderBy, limit, DocumentData } from 'firebase/firestore'
+import { db } from '../../utility/firebase/fireabse.util';
+import Link  from 'next/link'
 import { Box } from '@mui/material'
 
 const styled = {
@@ -10,26 +10,23 @@ const styled = {
 }
 export default function Collection() {
   const [ collections, setCollections ] = useState([1,2,3,4,5,6])
-  const [ collectionNft, setCollection ] = useState([])
+  const [ collectionNft, setCollection ] = useState(Array<DocumentData>);
   const [ nft, setNft ] = useState({})
 
-  useEffect(()=>{
-    const getNft=async()=>{
+  useEffect(() => {
+    const getNft = async()=>{
+      let nfts : Array<DocumentData> = [];
       const q = query(collection(db, "Nfts"), orderBy("date", "desc"));
       const querySnapshot = await getDocs(q);
-      const nfts=[]
-      querySnapshot.docs.map((doc)=>{
-         nfts.push({...doc.data(), id:doc.id})
-         setNft({...doc.data(), id:doc.id})
-
-         
+      querySnapshot.docs.map((doc) => {
+        nfts.push({...doc.data(), id:doc.id})
+        setNft({...doc.data(), id:doc.id})
        })
        setCollection(nfts)
      // setproposal( querySnapshot.docs)
    }
-
-   getNft()
-  },[])
+   getNft();
+  },[]);
   console.log(collectionNft)
 
   return (
@@ -45,7 +42,7 @@ export default function Collection() {
             return(
               <Box className='flex flex-col border space-y-6 py-12 rounded-lg shadow-md' sx={{"&:hover" : { transition: '0.2s ease-in-out', background: 'rgba(0, 0, 0, 0.11)', cursor: 'pointer'}}}>
                  <main className='flex justify-end px-4' >
-                  {item.available===true&& <h5 className='text-sm text-purple-600'>Available</h5>}
+                  {item.available===true && <h5 className='text-sm text-purple-600'>Available</h5>}
                   {item.available===false && <h5 className='text-sm text-purple-600'>Unavailable</h5>}
                  </main>
 
@@ -59,8 +56,8 @@ export default function Collection() {
                 </main>
 
                 <main className='flex justify-center'>
-                  <Link to={`/bid/${item.id}`} state={{item  }}>
-                    <button className='py-0.5 px-4 border rounded-full bg-purple-700 text-sm text-white hover:bg-white hover:text-purple-800'>View</button>
+                  <Link href={`/bid/${item.id}`} >
+                    {/* <button className='py-0.5 px-4 border rounded-full bg-purple-700 text-sm text-white hover:bg-white hover:text-purple-800'>View { item }</button> */}
                   </Link>
                 </main>
               </Box>

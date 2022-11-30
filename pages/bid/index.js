@@ -1,22 +1,24 @@
-import React ,{useState,useRef}from 'react'
+import React ,{useState, useRef}from 'react'
 import Player from '../../components/player'
-import equals from "../../assests/Pictures/Ed-Sheeran-Equals.webp"
-import { useLocation,useParams} from "react-router-dom";
-import { loadStdlib } from '@reach-sh/stdlib';
-import * as backend from '../../reach-app/build/index.main.mjs'
+// import useNa
+// import equals from "../../assets/Pictures/Ed-Sheeran-Equals.webp"
+// import { useLocation,useParams} from "react-router-dom";
+// import { loadStdlib } from '@reach-sh/stdlib';
+// import * as backend from '../../reach-app/build/index.main.mjs'
 import { AccountState} from '../../utility/recoilState/globalState';
-import { useRecoilValue,useRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState } from 'recoil';
 import Modal from '../../components/modal'
 import {AiOutlineCloseCircle} from "react-icons/ai"
 import {RiAuctionFill} from "react-icons/ri"
-import { BsConeStriped } from 'react-icons/bs';
+// import { BsConeStriped } from 'react-icons/bs';
 
 // const reach = loadStdlib('ALGO');
 
 export default function Bid() {
 
-  const location = useLocation()
-  const [locationState, setlocationState] = useState(location.state)
+  // const location = useLocation()
+  // const [locationState, setlocationState] = useState(location.state)
+  const [locationState, setlocationState] = useState()
 
   const connectedCtc = useRef();
 
@@ -104,7 +106,8 @@ export default function Bid() {
               <div>
                   <div className='flex flex-col justify-center items-center space-y-4'>
                       <h5>Contract information</h5>
-                      <h5>{locationState.item.ctcInfo}</h5>
+                      {/* <h5>{locationState.item.ctcInfo}</h5> */}
+                      <h5>locationState.item.ctcInfo</h5>
                         <textarea 
                           type='text'
                           onChange={(e)=>setctcInfo(e.target.value)}
@@ -112,7 +115,7 @@ export default function Bid() {
                           value={ctcInfo}
                           className="text-black rounded-lg border"
                         />
-                      <button onClick={()=>attach(ctcInfo)} className='px-3 py-0.5 border rounded-full text-sm text-white bg-blue-600 hover:bg-white hover:text-blue-600'>Attach</button>
+                      <button onClick={()=> {}} className='px-3 py-0.5 border rounded-full text-sm text-white bg-blue-600 hover:bg-white hover:text-blue-600'>Attach</button>
                     </div>
               </div>
               }
@@ -132,7 +135,7 @@ export default function Bid() {
                       />
                       <button onClick={submit} className='active:bg-blue-600 bg-blue-600 px-2 py-0.5 rounded-lg text-white text-sm hover:bg-white hover:text-blue-600'>Submit</button>
 
-                      <h5 className='text-xs'>Minimum Bid: {`${locationState.item.price} Algo`}</h5>
+                      <h5 className='text-xs'>Minimum Bid: locationState.item.price Algo</h5>
                   </>
                 }
 

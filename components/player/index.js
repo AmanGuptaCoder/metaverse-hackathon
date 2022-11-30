@@ -1,6 +1,6 @@
 import React, { useRef,useState } from 'react';
-import discImg from "../../assests/Pictures/img.png"
-import spiningDisc from "../../assests/Pictures/spinning disc.gif"
+// import discImg from "../../assets/Pictures/img.png"
+// import spiningDisc from "../../assets/Pictures/spinning disc.gif"
 
 import {BsFillPlayCircleFill, BsFillPauseCircleFill, BsFillSkipStartCircleFill, BsFillSkipEndCircleFill} from 'react-icons/bs';
 
@@ -10,10 +10,10 @@ export default function Player({songName}) {
     <div>
         <div className='flex space-x-4'>
           {playing===false&&
-             <img src={discImg} alt="" className='w-56 h-56'/>
+             <img src={"/img.png"} alt="" className='w-56 h-56'/>
           }
           {playing===true&&
-             <img src={spiningDisc} alt="" className='w-56 h-56'/>
+             <img src={"/spinning disc.gif"} alt="" className='w-56 h-56'/>
           }
            
            

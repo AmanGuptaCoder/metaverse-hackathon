@@ -1,10 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import Link from "next/link";
 import { Grid, Container, Stack, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-function Common({ imgsrc, visit,}) {
+type CommonProps = {
+  imgsrc: string;
+  visit: string;
+}
+
+function Common(props: CommonProps) {
+  const { imgsrc, visit } = props;
+
   return (
     // bgcolor:'background.paper', 
     <>
@@ -44,7 +51,7 @@ function Common({ imgsrc, visit,}) {
                   background: 'white'
                 }
               }}>
-                <NavLink to={visit}>Explore Audio Gallery</NavLink></Button>
+                <Link href={visit}>Explore Audio Gallery</Link></Button>
             </Stack>
           </Container>
           </Box>

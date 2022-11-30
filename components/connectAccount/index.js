@@ -32,7 +32,7 @@ const ConnectAccount= () =>{
       </Button> : <Button variant='contained' className='py-1 px-4 text-sm border border-slate-400 rounded-full hover:bg-rose-400 hover:border-0'
           disabled
         >
-            {account.slice(0,9)+"..."}
+            {account?.slice(0,9)+"..."}
         </Button>}
     </div>
   )  
