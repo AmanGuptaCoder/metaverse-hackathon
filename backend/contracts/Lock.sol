@@ -32,3 +32,28 @@ contract Lock {
         owner.transfer(address(this).balance);
     }
 }
+
+
+
+
+// Music sharing
+
+// Life is Music.Music has became the integral part of people's life.
+// Our platform allows people to connect and share Music.
+// A free platform that allows sharing of music.
+
+// How it works
+// ============
+// Parties: 
+//     - Music uploader: Music creators or platform admin is free to upload music file that is their work.
+//         Categories of uploader: 
+//             o Artists.
+//             o Upcoming artists.
+//             o When an artist uploads a song, they exhaust a tiny amount of the platform token i.e burn token.
+//             o There is a limited supply of the token. So it is deflationary as it decreases as more music are uploaded.
+
+//         Note: We will install AI softwares that can detect if music has been uploaded before.
+
+//     - Consumers: Music downloaders/consumers. 
+//         o Each time a music file is downloaded, the fee/charges is divided among the uploader and the platform.
+//         o As a consumer, holding our platform token allows you a significant amount of discount.
