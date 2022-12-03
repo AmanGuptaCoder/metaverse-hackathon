@@ -35,7 +35,7 @@ const config: HardhatUserConfig = {
 
   namedAccounts: {
     deployer: 0,
-    feeTo: 1
+    feeTo: String(process.env.DEPLOYER)
   },
 
   solidity: {

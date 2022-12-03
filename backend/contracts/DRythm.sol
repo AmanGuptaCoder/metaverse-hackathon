@@ -20,7 +20,7 @@ contract DRythm is Context, AbstractDRythm, Ownable {
 
   // Check for conditions that must evaluate to true before proceeding to executions
   modifier conditionsMustbeTrue(bool isFileUploaded, string memory errorMessage) {
-    if(!_getProfile(_msgSender()).isUploader) revert UserNeedPriorApproval(_msgSender());
+    require(_getProfile(_msgSender()).isUploader, "UserNeedPriorApproval");
     if(!isFileUploaded) revert FileError(errorMessage);
     _;
   }
@@ -97,13 +97,13 @@ contract DRythm is Context, AbstractDRythm, Ownable {
   }
 
   function approveUploader(address who) public modifyContext onlyOwner {
-    if(_getProfile(_msgSender()).isUploader) revert AlreadyApproved(_msgSender());
-     _updateProfile(true, who);
+    require(!_getProfile(who).isUploader, "AlreadyApproved");
+    _updateProfile(true, who);
   }
 
   function removeUploader(address who) public modifyContext onlyOwner {
-    if(!_getProfile(_msgSender()).isUploader) revert AlreadyRemoved(_msgSender());
-     _updateProfile(false, who);
+    require(_getProfile(who).isUploader, "AlreadyRemoved");
+    _updateProfile(false, who);
   }
 
   ///@dev Searches and return file index for fileHash

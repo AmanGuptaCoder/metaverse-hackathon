@@ -7,9 +7,6 @@ interface IDRythm {
   error FileNotExist(bytes32);
   error OnlyInContextOfUpload();
   error FeeToIsZeroAddress(address);
-  error UserNeedPriorApproval(address);
-  error AlreadyRemoved(address);
-  error AlreadyApproved(address);
   event FileAdded(bytes32, address);
   event FileRemoved(bytes32, address);
 

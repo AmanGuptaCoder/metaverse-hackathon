@@ -1,5 +1,8 @@
 {
   "name": "hardhat-project",
+  "scripts": {
+    "deploy": "hardhat deploy --export-all components/deployments/hardhat_contracts.json"
+  },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",
     "@nomicfoundation/hardhat-chai-matchers": "^1.0.5",
