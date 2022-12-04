@@ -1,18 +1,24 @@
 import { ethers } from "hardhat";
+import Web3 from 'web3'
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  const feeTo = "0xA7B2387bF4C259e188751B46859fcA7E2043FEFD";
+  const transferAmount = Web3.utils.toHex('100000000000000000000000');
+  const removalFee = Web3.utils.toHex('10000000000');
+  const DRythm = await ethers.getContractFactory("DRythm");
+  const dRythm = await DRythm.deploy(feeTo);
 
-  const lockedAmount = ethers.utils.parseEther("1");
+  await dRythm.deployed();
 
-  const Lock = await ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  await dRythm.approveUploader(feeTo);
+  await dRythm.approveUploader("0x16101742676EC066090da2cCf7e7380f917F9f0D");
+  await dRythm.approveUploader("0xe63537C16094Fcd6b49FE6730c182eC973940F4F");
+  await dRythm.setFee(removalFee, removalFee);
+  await dRythm.transfer(feeTo, transferAmount);
+  await dRythm.transfer("0x16101742676EC066090da2cCf7e7380f917F9f0D", transferAmount);
+  await dRythm.transfer("0xe63537C16094Fcd6b49FE6730c182eC973940F4F", transferAmount);
 
-  await lock.deployed();
-
-  console.log(`Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`);
+  console.log(`DRythm depoyed to ${dRythm.address}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere

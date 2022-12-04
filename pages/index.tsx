@@ -70,8 +70,6 @@
 //   )
 // }
 
-
-
 // import Head from 'next/head'
 // import Image from 'next/image'
 // import styles from '../styles/Home.module.css'
@@ -100,14 +98,17 @@
 
 // export default App;
 
-      {/* <Common
+{
+  /* <Common
         imgsrc={"/assets/Pictures/mic.jpg"}
         visit="/collections"
-      /> */}
+      /> */
+}
 
+//
 
 import React from "react";
-import { useMoralis } from 'react-moralis';
+import { useMoralis } from "react-moralis";
 // import Common from "../components/Common";
 // import mic from "../assets/Pictures/mic.jpg";
 // import heroImg from "../../assests/Pictures/img2.png"
@@ -115,416 +116,131 @@ import { useMoralis } from 'react-moralis';
 // import team1 from "../../assests/Pictures/team1.jpg"
 // import team2 from "../../assests/Pictures/team2.jpeg"
 // import team3 from "../../assests/Pictures/team3.jpg"
-import {MdEmail} from "react-icons/md"
-import {AiFillGithub} from "react-icons/ai"
-import {FaDiscord} from "react-icons/fa";
+import { MdEmail } from "react-icons/md";
+import { AiFillGithub } from "react-icons/ai";
+import { FaDiscord } from "react-icons/fa";
 import { Divider, Button, Container } from "@mui/material";
-import Link from 'next/link';
-import ConnectAccount from "../components/connectAccount";
+import Link from "next/link";
+import ConnectAccount from "../components/ConnectAccount";
 import { Grid, Box, Typography, Stack, Card, CardMedia, CardContent } from "@mui/material";
+import Gallery from "../components/Gallery";
 
 function Index() {
   const { account, isAuthenticated } = useMoralis();
+
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
-      <Grid container >
-          <Grid item xs={12} md={6}>
-            <div className="relative sm:pb-16 sm:pt-8">
-              <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="relative shadow-xl sm:overflow-hidden sm:rounded-2xl">
-                  
-                  <Box sx={{position: 'absolute'}}>
-                    <img
-                      className="h-full w-full object-cover"
-                      src="https://user-images.githubusercontent.com/1500684/157774694-99820c51-8165-4908-a031-34fc371ac0d6.jpg"
-                      alt="Sonic Youth On Stage"
-                    />
-                    <div className="absolute inset-0 bg-[color:rgba(254,204,27,0.5)] mix-blend-multiply" />
-                  </Box>
-                  
-                  <div className="relative px-4 pt-16 pb-8 sm:px-6 sm:pt-24 sm:pb-14 lg:px-8 lg:pb-20 lg:pt-32">
-                    <h1 className="text-center text-6xl font-extrabold tracking-tight sm:text-8xl lg:text-9xl">
-                      <span className="block uppercase text-yellow-500 drop-shadow-md">
-                        Indie Stack
-                      </span>
-                    </h1>
-
-                    <Typography variant="body1" align="center" paragraph>
-                      Create, share, transfer, sell and buy and monetize any form of Audio work: Music, tutorials etc with a click
-                    </Typography>
-                    <p className="mx-auto mt-6 max-w-lg text-center text-xl text-white sm:max-w-3xl">
-                      Check the README.md file for instructions on how to get this
-                      project deployed.
-                    </p>
-                    <div className="mx-auto mt-10 max-w-sm sm:flex sm:max-w-none sm:justify-center">
-                      {isAuthenticated ? (
-                        <Link
-                          href="/collections"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
-                        >
-                          View Collections
-                        </Link>
-                      ) : (
-                        <div className="space-y-4 sm:mx-auto sm:inline-grid sm:grid-cols-2 sm:gap-5 sm:space-y-0">
-                          {/* <ConnectAccount /> */}
-                          <Link
-                            href="/join"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-white px-4 py-3 text-base font-medium text-yellow-700 shadow-sm hover:bg-yellow-50 sm:px-8"
-                          >
-                            Sign up
-                          </Link>
-                          <Button
-                            href="/login"
-                            className="flex items-center justify-center rounded-md bg-yellow-500 px-4 py-3 font-medium text-white hover:bg-yellow-600"
-                          >
-                            ConnectWallet
-                          </Button>
-                        </div>
-                      )}
-                    </div>
-                    {/* <a href="https://remix.run">
-                      <img
-                        src="https://user-images.githubusercontent.com/1500684/158298926-e45dafff-3544-4b69-96d6-d3bcc33fc76a.svg"
-                        alt="Remix"
-                        className="mx-auto mt-16 w-full max-w-[12rem] md:max-w-[16rem]"
-                      />
-                    </a> */}
-                  </div>
-                </div>
+      <Grid container>
+        <Grid item xs={12} md={6}>
+          <Stack>
+            <Container maxWidth="sm">
+              <Typography variant="h3" gutterBottom fontWeight="bold" color="purple" sx={{ mt: 4 }}>
+                {" "}
+                Decentralized Music gallery powered by Polygon{" "}
+              </Typography>
+              <Typography paragraph sx={{ fontSize: "16px", fontWeight: "bold" }}>
+                Access and download old and latest music of your choice.
+              </Typography>
+              <div className="container">
+                <ul>
+                  <Typography>No credit card hassle</Typography>
+                  <Typography>Secure download and file integrity</Typography>
+                  <Typography>Earn each time your music is downloaded</Typography>
+                  <Typography>Access high quality music at extremely cheaper fee</Typography>
+                </ul>
               </div>
-            </div>
-            {/* <Box sx={{p: 6,}}>
-              <img src={"/mic.jpg"} width={'100%'} height={'100%'} alt="Image" />
-            </Box> */}
-
-          </Grid>
-        </Grid> 
-        <Divider />
-
-      {/* <img src={team1} alt=""  className='h-20 w-20 rounded-full'/> */}
-      <div className='team flex flex-col justify-center items-center py-12 px-16'>
-        <Typography variant='h5' className='text-purple-600 font-semibold pb-4'>Team-72</Typography>
-        <Grid container spacing={2}>
-          <Grid item xs={12} md={4} >
-            <Box>
-              <Card sx={{}}>
-                <Grid item container xs={12}>
-                  <Grid item xs={5}>
-                    <CardMedia component="img" sx={{p: 4, width: '100%', height: '100%' }} image={"/team1.jpg"} alt="random" className='rounded-full'/>
-                  </Grid>
-                  <Grid item xs={7} className='shadow-lg'>
-                    <CardContent sx={{ flexGrow: 1, }} >
-                      <Stack sx={{ }}>
-                        <Typography gutterBottom variant="h5" className='text-sm text-purple-400'>Frontend Developer</Typography>
-                        <Typography variant='body1' gutterBottom className='text-lg font-semibold'>{"Oliviahotakwa"}</Typography>
-                        <Typography className='text-xs'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo atque minima ipsum maxime possimus error cupiditate a libero ipsa?</Typography>
-                        <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, pt: 2 }}>
-                          <MdEmail className="text-slate-500 cursor-pointer  text-lg" />
-                          <AiFillGithub className="text-slate-500 cursor-pointer  text-lg"/>
-                          <FaDiscord className="text-slate-500 cursor-pointer  text-lg"/>
-                        </Box>
-                      </Stack>
-                    </CardContent>
-                  </Grid>
-                </Grid>
-              </Card>
-            </Box>
-          </Grid>
-
-          <Grid item xs={12} md={4}>
-            {/* <Grid item xs={12} md={4} > */}
-              <Box>
-                <Card sx={{}}>
-                  <Grid item container xs={12}>
-                    <Grid item xs={5}><CardMedia component="img" sx={{p: 4, width: '100%', height: '100%' }} image={"/team2.jpeg"} alt="random" className='rounded-full'/></Grid>
-                    <Grid item xs={7}>
-                      <CardContent sx={{ flexGrow: 1, }} >
-                        <Stack sx={{ }}>
-                          <Typography gutterBottom variant="h5" className='text-sm text-purple-400'>Fullstack Developer</Typography>
-                          <Typography variant='body1' gutterBottom className='text-lg font-semibold'>{"Scapula "}</Typography>
-                          <Typography className='text-xs'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo atque minima ipsum maxime possimus error cupiditate a libero ipsa?</Typography>
-                          <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, pt: 2 }}>
-                            <MdEmail className="text-slate-500 cursor-pointer  text-lg" />
-                            <AiFillGithub className="text-slate-500 cursor-pointer  text-lg"/>
-                            <FaDiscord className="text-slate-500 cursor-pointer  text-lg"/>
-                          </Box>
-                        </Stack>
-                      </CardContent>
-                    </Grid>
-                  </Grid>
-                </Card>
-              </Box>
-            {/* </Grid> */}
-          </Grid>
-          
-          <Grid item xs={12} md={4}>
-          <Box>
-            <Card sx={{}}>
-              <Grid item container xs={12}>
-                <Grid item xs={5}><CardMedia component="img" sx={{p: 4, width: '100%', height: '100%' }} image={"/team3.jpg"} alt="random" className='rounded-full'/></Grid>
-                <Grid item xs={7}>
-                  <CardContent sx={{ flexGrow: 1, }} >
-                    <Stack sx={{ }}>
-                      <Typography gutterBottom variant="h5" className='text-sm text-purple-400'>Fullstack Developer</Typography>
-                      <Typography variant='body1' gutterBottom className='text-lg font-semibold'>{"Bobelr#8524 "}</Typography>
-                      <Typography className='text-xs'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo atque minima ipsum maxime possimus error cupiditate a libero ipsa?</Typography>
-                      <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, pt: 2 }}>
-                        <MdEmail className="text-slate-500 cursor-pointer  text-lg" />
-                        <AiFillGithub className="text-slate-500 cursor-pointer  text-lg"/>
-                        <FaDiscord className="text-slate-500 cursor-pointer  text-lg"/>
-                      </Box>
-                      </Stack>
-                    </CardContent>
-                  </Grid>
-                </Grid>
-              </Card>
-            </Box>
-          </Grid>
+              <Divider />
+              <Button
+                variant="outlined"
+                sx={{
+                  height: "58px",
+                  width: "50%",
+                  mt: 2,
+                  background: "none",
+                  borderColor: "purple",
+                  "&:hover": {
+                    transition: "0.2s ease-in-out",
+                    zIndex: "1",
+                    color: "purple",
+                    background: "stone"
+                  }
+                }}
+              >
+                <Link href={"/upload"}>Upload</Link>
+              </Button>
+            </Container>
+          </Stack>
         </Grid>
-      </div>
+        <Grid item xs={12} md={6}>
+          <Box>
+            <img className="h-full w-full object-cover" src="https://user-images.githubusercontent.com/1500684/157774694-99820c51-8165-4908-a031-34fc371ac0d6.jpg" alt="Sonic Youth On Stage" />
+          </Box>
+        </Grid>
+      </Grid>
+      <Divider />
+      <Gallery />
     </main>
   );
 }
 
 export default Index;
 
+{
+  /* <img src={team1} alt=""  className='h-20 w-20 rounded-full'/> */
+}
+{
+  /* <div className='team flex flex-col justify-center items-center py-12 px-16'>
+<Typography variant='h5' className='text-purple-600 font-semibold pb-4'>Gallery</Typography>
+<Grid container spacing={2}>
+  <Grid item xs={12} md={4} >
+    <Box>
+      <Card sx={{}}>
+        <Grid item container xs={12}>
+          <Grid item xs={5}>
+            <CardMedia component="img" sx={{p: 4, width: '100%', height: '100%' }} image={"/team1.jpg"} alt="random" className='rounded-full'/>
+          </Grid>
+          <Grid item xs={7} className='shadow-lg'>
+            <CardContent sx={{ flexGrow: 1, }} >
+              <Stack sx={{ }}>
+                <Typography gutterBottom variant="h5" className='text-sm text-purple-400'>Frontend Developer</Typography>
+                <Typography variant='body1' gutterBottom className='text-lg font-semibold'>{"Oliviahotakwa"}</Typography>
+                <Typography className='text-xs'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo atque minima ipsum maxime possimus error cupiditate a libero ipsa?</Typography>
+                <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, pt: 2 }}>
+                  <MdEmail className="text-slate-500 cursor-pointer  text-lg" />
+                  <AiFillGithub className="text-slate-500 cursor-pointer  text-lg"/>
+                  <FaDiscord className="text-slate-500 cursor-pointer  text-lg"/>
+                </Box>
+              </Stack>
+            </CardContent>
+          </Grid>
+        </Grid>
+      </Card>
+    </Box>
+  </Grid>
 
-
-
-
-
-
-
-
-// import React from 'react'
-// import heroImg from "../../assests/Pictures/img2.png"
-// import team1 from "../../assests/Pictures/team1.jpg"
-// import team2 from "../../assests/Pictures/team2.jpeg"
-// import team3 from "../../assests/Pictures/team3.jpg"
-// import {MdEmail} from "react-icons/md"
-// import {AiFillGithub} from "react-icons/ai"
-// import {FaDiscord} from "react-icons/fa"
-
-
-{/* <div className='team flex flex-col justify-center items-center py-12 px-16'>
-<h5 className='text-blue-600 text-lg font-semibold'>Team-72</h5>
-<main className='flex  justify-center items-center space-x-4 py-6'>
-    <div className='team1 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-      <main className='flex justify-center'>
-          <img src={team1} alt=""  className='h-20 w-20 rounded-full'/>
-      </main>
-      <main className='flex flex-col justify-center space-y-0'>
-          <h5 className='text-sm text-purple-400'>Frontend Developer</h5>
-          <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-          <p className='text-xs'>
-            Lorem ipsum dolor sit amet,<br></br>
-            consectetur adipiscing elit,<br></br>
-            sed do eiusmod tempor incididunt <br></br>
-            ut labore et dolore magna aliqua</p>
-          <main className="flex justify-center items-center space-x-4 py-3 ">
-                    <MdEmail className="text-slate-500  text-lg" />
-                    <AiFillGithub className="text-slate-500  text-lg"/>
-                    <FaDiscord className="text-slate-500  text-lg"/>
-          </main>
-      </main>
-    </div>
-
-    <div className='team2 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-      <main className='flex justify-center'>
-          <img src={team2} alt=""  className='h-20 w-20 rounded-full'/>
-      </main>
-      <main className='flex flex-col justify-center space-y-0'>
-          <h5 className='text-sm text-purple-400'>Fullstack Developer</h5>
-          <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-          <p className='text-xs'>
-            Lorem ipsum dolor sit amet,<br></br>
-            consectetur adipiscing elit,<br></br>
-            sed do eiusmod tempor incididunt <br></br>
-            ut labore et dolore magna aliqua</p>
-          <main className="flex justify-center items-center space-x-4 py-3">
-            <MdEmail className="text-slate-500  text-lg" />
-            <AiFillGithub className="text-slate-500  text-lg"/>
-          <FaDiscord className="text-slate-500  text-lg"/>
-        </main>
-      </main>
-    </div>
-
-    <div className='team3 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-      <main className='flex justify-center'>
-          <img src={team3} alt=""  className='h-20 w-20 rounded-full'/>
-      </main>
-      <main className='flex flex-col justify-center space-y-0'>
-          <h5 className='text-sm text-purple-400'>Fullstack Developer</h5>
-          <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-          <p className='text-xs'>
-            Lorem ipsum dolor sit amet,<br></br>
-            consectetur adipiscing elit,<br></br>
-            sed do eiusmod tempor incididunt <br></br>
-            ut labore et dolore magna aliqua</p>
-            <main className="flex justify-center items-center space-x-4 py-3">
-            <MdEmail className="text-slate-500 text-lg" />
-            <AiFillGithub className="text-slate-500  text-lg"/>
-          <FaDiscord className="text-slate-500  text-lg"/>
-                  </main>
-      </main>
-    </div>
-</main>
-// export default function Home() { */}
-//   return (
-//     <div>
-//        <div>
-//           <div className='top flex px-20 py-20 flex items-center'>
-//              <main className='w-3/5 flex flex-col space-y-4'>
-//               <h5 className='text-3xl font-semibold text-slate-700'>Welcome to the world of <br></br><span className='text-4xl font-bold text-slate-900 py-0.5'>Audio NFT's.</span></h5>
-//                <p className='text-slate-700 text-2xl font-semibold '>
-//                We're a team of talented <br></br>
-//                musical creators. Music is art and art is music.
-//                <br></br>
-//                Own your space.
-//                </p>
-//                <div className='flex px-6 py-3 '>
-//                   <button className='py-0.5 px-2 bg-blue-700 text-white rounded-sm text-sm hover:bg-white hover:text-blue-700'>Explore</button>
-                
-//                </div>
-//              </main>
-//              <main className='w-2/5 flex justify-center'>
-//                 <img src={heroImg} alt="" className=''/>
-//              </main>
-
-//           </div>
-//           <div className='mid flex flex-col justify-center items-center space-y-6' >
-//             <h5 className='text-blue-600 text-lg font-semibold'>About Our project</h5>
-//             <p className='text-sm text-slate-800 px-32'>
-//                {"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "}
-//             </p>
-            
-//             </div>
-//          <div className='team flex flex-col justify-center items-center py-12 px-16'>
-//             <h5 className='text-blue-600 text-lg font-semibold'>Team-72</h5>
-//             <main className='flex  justify-center items-center space-x-4 py-6'>
-//                <div className='team1 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-//                   <main className='flex justify-center'>
-//                      <img src={team1} alt=""  className='h-20 w-20 rounded-full'/>
-//                   </main>
-//                   <main className='flex flex-col justify-center space-y-0'>
-//                      <h5 className='text-sm text-purple-400'>Frontend Developer</h5>
-//                      <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-//                      <p className='text-xs'>
-//                         Lorem ipsum dolor sit amet,<br></br>
-//                         consectetur adipiscing elit,<br></br>
-//                         sed do eiusmod tempor incididunt <br></br>
-//                         ut labore et dolore magna aliqua</p>
-//                       <main className="flex justify-center items-center space-x-4 py-3 ">
-//                                 <MdEmail className="text-slate-500  text-lg" />
-//                                 <AiFillGithub className="text-slate-500  text-lg"/>
-//                                 <FaDiscord className="text-slate-500  text-lg"/>
-//                      </main>
-//                   </main>
-//                </div>
-
-//                <div className='team2 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-//                   <main className='flex justify-center'>
-//                      <img src={team2} alt=""  className='h-20 w-20 rounded-full'/>
-//                   </main>
-//                   <main className='flex flex-col justify-center space-y-0'>
-//                      <h5 className='text-sm text-purple-400'>Fullstack Developer</h5>
-//                      <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-//                      <p className='text-xs'>
-//                         Lorem ipsum dolor sit amet,<br></br>
-//                         consectetur adipiscing elit,<br></br>
-//                         sed do eiusmod tempor incididunt <br></br>
-//                         ut labore et dolore magna aliqua</p>
-//                      <main className="flex justify-center items-center space-x-4 py-3">
-//                        <MdEmail className="text-slate-500  text-lg" />
-//                        <AiFillGithub className="text-slate-500  text-lg"/>
-//                       <FaDiscord className="text-slate-500  text-lg"/>
-//                    </main>
-//                   </main>
-//                </div>
-
-//                <div className='team3 flex  items-center space-x-10 border py-8 px-12 rounded-lg shadow-lg'>
-//                   <main className='flex justify-center'>
-//                      <img src={team3} alt=""  className='h-20 w-20 rounded-full'/>
-//                   </main>
-//                   <main className='flex flex-col justify-center space-y-0'>
-//                      <h5 className='text-sm text-purple-400'>Fullstack Developer</h5>
-//                      <h5 className='text-lg font-semibold'>{"Lorem ipsum dolor "}</h5>
-//                      <p className='text-xs'>
-//                         Lorem ipsum dolor sit amet,<br></br>
-//                         consectetur adipiscing elit,<br></br>
-//                         sed do eiusmod tempor incididunt <br></br>
-//                         ut labore et dolore magna aliqua</p>
-//                         <main className="flex justify-center items-center space-x-4 py-3">
-//                         <MdEmail className="text-slate-500 text-lg" />
-//                        <AiFillGithub className="text-slate-500  text-lg"/>
-//                       <FaDiscord className="text-slate-500  text-lg"/>
-//                              </main>
-//                   </main>
-//                </div>
-//             </main>
-//          </div>
-//        </div>
-//     </div>
-//   )
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// <Grid item xs={12} md={6} >
-// <Box sx={{bgcolor:'background.paper', pt: 8, pb: 6 }}className='bgImage'>
-//   <Container maxWidth="sm">
-//     <Typography
-//       component="h1"
-//       variant="h2"
-//       align="center"
-//       gutterBottom
-//       fontWeight='bold'
-//       color='purple'
-//     >
-//     {/* &apos; */}
-//     Audio NFT Marketplace
-//   </Typography>
-//   <Typography variant="h5" align="center" sx={{color:"black"}}>A marketplace built for your need.</Typography>
-//   <Typography variant="body1" align="center" paragraph>
-//     Create, share, transfer, sell and buy and monetize any form of Audio work: Music, tutorials etc with a click
-//   </Typography>
-//   <Stack sx={{ pt: 4 }} direction="row" spacing={2} justifyContent="center">
-//     <Button 
-//       variant="contained" 
-//       sx={{
-//         height: '58px', 
-//         background: 'purple',
-//         "&:hover" : {
-//           transition: '0.2s ease-in-out',
-//           zIndex: '1',
-//           color: 'black',
-//           background: 'white'
-//         }
-//       }}
-//     >
-//       <Link href={'/collections'}>Explore Audio Gallery</Link></Button>
-//   </Stack>
-// </Container>
-// </Box>
-// </Grid>
+  <Grid item xs={12} md={4}>
+    {/* <Grid item xs={12} md={4} > */
+}
+//       <Box>
+//         <Card sx={{}}>
+//           <Grid item container xs={12}>
+//             <Grid item xs={5}><CardMedia component="img" sx={{p: 4, width: '100%', height: '100%' }} image={"/team2.jpeg"} alt="random" className='rounded-full'/></Grid>
+//             <Grid item xs={7}>
+//               <CardContent sx={{ flexGrow: 1, }} >
+//                 <Stack sx={{ }}>
+//                   <Typography gutterBottom variant="h5" className='text-sm text-purple-400'>Fullstack Developer</Typography>
+//                   <Typography variant='body1' gutterBottom className='text-lg font-semibold'>{"Scapula "}</Typography>
+//                   <Typography className='text-xs'>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nemo atque minima ipsum maxime possimus error cupiditate a libero ipsa?</Typography>
+//                   <Box sx={{display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, pt: 2 }}>
+//                     <MdEmail className="text-slate-500 cursor-pointer  text-lg" />
+//                     <AiFillGithub className="text-slate-500 cursor-pointer  text-lg"/>
+//                     <FaDiscord className="text-slate-500 cursor-pointer  text-lg"/>
+//                   </Box>
+//                 </Stack>
+//               </CardContent>
+//             </Grid>
+//           </Grid>
+//         </Card>
+//       </Box>
+//     {/* </Grid> */}
+//   </Grid>

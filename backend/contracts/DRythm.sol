@@ -32,10 +32,7 @@ contract DRythm is Context, AbstractDRythm, Ownable {
       _msgSender(),
       50_000_000 * (10 ** 18)
     ) 
-  {
-    if(_feeTo == address(0)) revert FeeToIsZeroAddress(_feeTo);
-    feeTo = _feeTo;
-  }
+  { feeTo = _feeTo; }
 
   receive() external payable {
     Address.sendValue(payable(feeTo), msg.value);
@@ -55,7 +52,7 @@ contract DRythm is Context, AbstractDRythm, Ownable {
     modifyContext 
     returns(bool) 
   {
-    _takeFee(_msgSender(), pData.uploadFee);
+    _takeFee(_msgSender(), feeTo, pData.uploadFee, true);
     uint fileIndex = pData.files.length;
     pData.files.push(Data(block.timestamp, 0, _msgSender()));
     pData.fileIndexes[fileHash] = FileStatus(true, fileIndex);
@@ -73,7 +70,7 @@ contract DRythm is Context, AbstractDRythm, Ownable {
     returns (bool _return) 
   {
     if(!pData.fileIndexes[fileHash].isUploaded) revert FileError("File not exist");
-    _takeFee(_msgSender(), pData.removalFee);
+    _takeFee(_msgSender(), feeTo, pData.removalFee, true);
     _return = pData.fileIndexes[fileHash].isUploaded;
     delete pData.files[_findIndex(fileHash)];
     delete pData.fileIndexes[fileHash];
@@ -89,10 +86,11 @@ contract DRythm is Context, AbstractDRythm, Ownable {
     external 
     returns(bool)
   {
+    uint fileIndex = _findIndex(fileHash);
     if(!pData.fileIndexes[fileHash].isUploaded) revert FileError("File not exist");
-    _takeFee(_msgSender(), pData.downloadFee);
+    _takeFee(_msgSender(), pData.files[fileIndex].uploader, pData.downloadFee, false);
     
-    pData.files[_findIndex(fileHash)].downloadCount ++;
+    pData.files[fileIndex].downloadCount ++;
     return true;
   }
 
@@ -111,9 +109,24 @@ contract DRythm is Context, AbstractDRythm, Ownable {
     _return = pData.fileIndexes[fileHash].index;
   }
 
-  // Deduct and burn fee
-  function _takeFee(address who, uint fee) private {
-    _burn(who, fee);
+  /**@dev Deducts fee from caller. 
+   * For testing purpose, we will spread the sharing formula in 30/70
+   * i.e 70% for the uploader and 30 for the platform. 
+   * Note: 30% accrued to the platform is instantly burnt. This in turn increases the value 
+   * of the platform asset. 
+   * 
+   */
+  function _takeFee(address from, address to, uint fee, bool uploadContext) private {
+    if(fee > 0) {
+      uint burnable;
+      if(!uploadContext) {
+        unchecked {
+          burnable = (fee * 30) / 100;
+          _transfer(from, to, fee - burnable);
+        }
+      }
+      _burn(from, fee);
+    }
   }
 
   ///@dev Resets fees 

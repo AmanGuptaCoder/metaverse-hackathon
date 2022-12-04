@@ -1,39 +1,48 @@
 import React,{useState} from 'react'
-// import Modal from "../modal"
-// import {AiOutlineCloseCircle} from "react-icons/ai"
-// import { AccountState } from '../../utility/recoilState/globalState';
-// import {useRecoilState} from "recoil"
 import { useMoralis } from 'react-moralis';
 import Button from "@mui/material/Button";
+import Address from '../Address';
 
-// const reach = loadStdlib('ALGO');
 const ConnectAccount= () =>{
-  const [trigger,setTrigger] = useState(false)
-  // const [account,setAccount] = useRecoilState( AccountState)
-  // const [address,setAddress] = useState("")
 
   const { 
     account,
-      authenticate,
-        isWeb3Enabled, 
-          isAuthenticated, 
-            isAuthenticating, 
-              isWeb3EnableLoading } = useMoralis();
+      logout,
+        authenticate,
+          isWeb3Enabled, 
+            isAuthenticated, 
+              isAuthenticating, 
+                isWeb3EnableLoading } = useMoralis();
   return(
     <div className='connect'>
       { 
-        !isAuthenticated? <Button 
-          variant='contained'
+        !isAuthenticated || !isWeb3Enabled? <Button 
+          disabled={isAuthenticating}
+          variant='text'
           disableElevation
           sx={{background: 'purple', "&:hover": { transition: '0.2sec ease-in-out', background: 'white', color: 'purple', fontWeight: "bold"}}}
-          onClick={async()=> { await authenticate({ provider: "walletconnect", signingMessage: "Connecting to m"})}}
+          onClick={async()=> { 
+            if(!isAuthenticated) {
+              await authenticate({ provider: "wmetamask", signingMessage: "Connecting to DRythm"})
+            } else {
+              await logout();
+            }
+          }}
       >
         Connect Wallet 
-      </Button> : <Button variant='contained' className='py-1 px-4 text-sm border border-slate-400 rounded-full hover:bg-rose-400 hover:border-0'
-          disabled
-        >
-            {account?.slice(0,9)+"..."}
-        </Button>}
+        </Button> : <Address
+          copyable
+          display
+          address={account || `0x${'0'.repeat(40)}`}
+          size={6}
+          style={{
+            fontWeight: 'bold',
+            color: 'purple',
+            display: 'flex',
+            fontSize: '18px'
+          }}
+        />
+      }
     </div>
   )  
   
