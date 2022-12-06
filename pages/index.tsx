@@ -100,15 +100,15 @@
 
 {
   /* <Common
-        imgsrc={"/assets/Pictures/mic.jpg"}
-        visit="/collections"
-      /> */
+      //   imgsrc={"/assets/Pictures/mic.jpg"}
+      //   visit="/collections"
+      // /> */
 }
 
 //
 
 import React from "react";
-import { useMoralis } from "react-moralis";
+// import { useMoralis } from "react-moralis";
 // import Common from "../components/Common";
 // import mic from "../assets/Pictures/mic.jpg";
 // import heroImg from "../../assests/Pictures/img2.png"
@@ -116,17 +116,17 @@ import { useMoralis } from "react-moralis";
 // import team1 from "../../assests/Pictures/team1.jpg"
 // import team2 from "../../assests/Pictures/team2.jpeg"
 // import team3 from "../../assests/Pictures/team3.jpg"
-import { MdEmail } from "react-icons/md";
-import { AiFillGithub } from "react-icons/ai";
-import { FaDiscord } from "react-icons/fa";
+// import { MdEmail } from "react-icons/md";
+// import { AiFillGithub } from "react-icons/ai";
+// import { FaDiscord } from "react-icons/fa";
 import { Divider, Button, Container } from "@mui/material";
 import Link from "next/link";
-import ConnectAccount from "../components/ConnectAccount";
+// import ConnectAccount from "../components/ConnectAccount";
 import { Grid, Box, Typography, Stack, Card, CardMedia, CardContent } from "@mui/material";
 import Gallery from "../components/Gallery";
 
 function Index() {
-  const { account, isAuthenticated } = useMoralis();
+  // const { account, isAuthenticated } = useMoralis();
 
   return (
     <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">

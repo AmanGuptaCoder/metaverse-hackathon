@@ -2,7 +2,7 @@ import { CSSProperties, useEffect } from "react";
 import { useState } from "react";
 import { getEllipsisTxt } from "./helpers/formatters";
 import Blockie from "./Blockie";
-import { useMoralis } from "react-moralis";
+// import { useMoralis } from "react-moralis";
 
 const styles = {
   pointer: {
@@ -25,7 +25,7 @@ interface AddressProps {
 }
 const Address = (props: AddressProps ) => {
   const [isClicked, setIsClicked] = useState(false);
-  const { account } = useMoralis();
+  // const { account } = useMoralis();
 
   const { 
     address,
@@ -51,7 +51,7 @@ const Address = (props: AddressProps ) => {
       strokeLinejoin="round"
       style={{ cursor: "pointer"}}
       onClick={() => {
-        navigator.clipboard.writeText(String(account));
+        navigator.clipboard.writeText(String(address));
         setIsClicked(true);
         setTimeout(() => { setIsClicked(false)}, 6000);
       }}
@@ -66,9 +66,9 @@ const Address = (props: AddressProps ) => {
 
   return (
     <div style={style || {display: "flex", background: 'none', gap: "1px", justifyContent: "center", alignItems: "center", fontSize: "18px", color: "blue"}}>
-      <span style={styleAvatarLeft}>{avatar === "left" && <Blockie address={account} size={size} />}</span> 
-      <a style={!copyable ? styles.disabled : styles.pointer} href={`https://mumbai.polygonscan.com/address/${account}`} rel="noreferrer" target="_blank">{size ? getEllipsisTxt(account || address, size) : account}</a>
-      <span style={styleAvatarRight}>{avatar === "right" && <Blockie style={{background: 'none'}} address={account} size={6} />}</span>
+      <span style={styleAvatarLeft}>{avatar === "left" && <Blockie address={address} size={size} />}</span> 
+      <a style={!copyable ? styles.disabled : styles.pointer} href={`https://mumbai.polygonscan.com/address/${address}`} rel="noreferrer" target="_blank">{size ? getEllipsisTxt(address || address, size) : address}</a>
+      <span style={styleAvatarRight}>{avatar === "right" && <Blockie style={{background: 'none'}} address={address} size={6} />}</span>
       <span style={styleCopy}>{copyable && (isClicked ? display && <Check /> : props?.display && <Copy />)}</span>
     </div>
   );

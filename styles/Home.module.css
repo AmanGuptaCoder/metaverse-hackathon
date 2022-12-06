@@ -127,3 +127,12 @@
     filter: invert(1);
   }
 }
+
+.boxloader {
+  position: relative;
+  left: 35em;
+  top: 13em;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}

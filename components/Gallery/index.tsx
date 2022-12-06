@@ -9,10 +9,14 @@ import {
   Typography, 
   CardContent, } from '@mui/material';
 
+import { useAppContext } from '../Storage';
+import BigNumber from "bignumber.js"
+
 import Link from 'next/link';
-import { useMoralis } from 'react-moralis';
+// import { useMoralis } from 'react-moralis';
 import Web3 from 'web3';
 import { contractAddress, abi } from "../abi";
+import sendtransaction from "../apis";
 
 // import { abi, address } from "../../backend/deployments/matic/DRythm.json";
 
@@ -22,26 +26,49 @@ type CollectionType = {
   url: string;
 }
 
+type ListObject = {
+  dateUploaded: BigNumber;
+  downloadCount: BigNumber;
+  uploader: string;
+}
+
 const Gallery = () => {
   const [ collections, setCollections ] = React.useState(IMAGES);
-  const { Moralis } = useMoralis();
+  const { sendTransaction, readData } = sendtransaction();
+  const [poolList, updatePoolList] = React.useState(Array<ListObject>);
+
+  const { setInProgress, setMessage } = useAppContext();
+
+  React.useEffect(() => {
+    const _fetchData = async() => {
+      const result = await readData(
+        {
+          abi: abi,
+          contractAddress: contractAddress,
+          setmessage: setMessage,
+        },
+      );
+      updatePoolList({...result});
+    }
+    _fetchData();
+  }, []);
 
   async function handleClick (id: number) {
     const fileHash = Web3.utils.keccak256(IMAGES[id].url);
-    await Moralis.executeFunction({
+    await sendTransaction({
       abi: abi,
-      functionName: 'download',
       contractAddress: contractAddress,
-      params: {
-        fileHash: fileHash
-      },
+      functionName: 'download',
+      setmessage: setMessage,
+      setInProgress: setInProgress,
+      fileHash: fileHash,
     })
   }
 
   return (
     <div className='team flex flex-col justify-center items-center py-12 px-16'>
       <Typography variant='h5' sx={{color:'purple', pb: 2}}>Gallery</Typography>
-      <Grid container xs spacing={2}>
+      <Grid container spacing={2}>
         {
           collections.map((items: CollectionType, id: number) => (
             <Grid item container xs={12} md={4} key={id}>
@@ -128,5 +155,13 @@ const IMAGES: Array<CollectionType> = [
   { artist: 'Micheal Jackson',
     title: 'Beat it',
     url: '/img5.png'
+  },
+  { artist: 'Khate henky',
+    title: 'Hello',
+    url: '/mic.jpg',
+  },
+  { artist: 'Micheal Jackson',
+    title: 'Frame it',
+    url: '/img4.png'
   },
 ]

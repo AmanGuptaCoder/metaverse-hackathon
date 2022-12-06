@@ -2,38 +2,42 @@ import React,{useState} from 'react'
 import { useMoralis } from 'react-moralis';
 import Button from "@mui/material/Button";
 import Address from '../Address';
+import { useDRythm } from "../DRythmDappProvider/useDRythm";
+import { useAppContext } from '../Storage';
 
-const ConnectAccount= () =>{
+const defaultAccount = '0xA7B2387bF4C259e188751B46859fcA7E2043FEFD'
+
+const ConnectAccount = ({  }) =>{
+  const [ chainId, setChainId ] = React.useState(false);
+  const [ isAuthenticating, setIsAuthenticating ] = React.useState(false);
+  const [ address, setAccount ] = React.useState("");
+  const { isAuthenticated, account,  } = useAppContext();
 
   const { 
-    account,
-      logout,
+    enableWeb3,
+      chainMenu,
         authenticate,
-          isWeb3Enabled, 
-            isAuthenticated, 
-              isAuthenticating, 
-                isWeb3EnableLoading } = useMoralis();
+          switchNetwork } = useDRythm();
+
   return(
     <div className='connect'>
       { 
-        !isAuthenticated || !isWeb3Enabled? <Button 
+        address === "" ? <Button 
           disabled={isAuthenticating}
           variant='text'
           disableElevation
           sx={{background: 'purple', "&:hover": { transition: '0.2sec ease-in-out', background: 'white', color: 'purple', fontWeight: "bold"}}}
           onClick={async()=> { 
-            if(!isAuthenticated) {
-              await authenticate({ provider: "wmetamask", signingMessage: "Connecting to DRythm"})
-            } else {
-              await logout();
-            }
-          }}
+            const res = await authenticate();
+            setAccount(res);
+
+        }}
       >
         Connect Wallet 
         </Button> : <Address
           copyable
           display
-          address={account || `0x${'0'.repeat(40)}`}
+          address={address || defaultAccount}
           size={6}
           style={{
             fontWeight: 'bold',
