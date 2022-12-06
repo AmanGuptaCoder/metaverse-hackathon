@@ -10,7 +10,6 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import ConnectAccount from "../ConnectAccount";
 import MenuItem from "@mui/material/MenuItem";
-// import { NavLink } from "react-router-dom"
 import Link from "next/link";
 
 const pages = ["Home", "Upload", "Categories"];

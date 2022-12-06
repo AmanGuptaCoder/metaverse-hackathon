@@ -51,7 +51,7 @@ const Gallery = () => {
       updatePoolList({...result});
     }
     _fetchData();
-  }, []);
+  }, [readData, setMessage]);
 
   async function handleClick (id: number) {
     const fileHash = Web3.utils.keccak256(IMAGES[id].url);

@@ -1,7 +1,8 @@
 import React from "react";
 import { Divider, Button, Container } from "@mui/material";
 import Link from "next/link";
-import { Grid, Box, Typography, Stack, Card, CardMedia, CardContent } from "@mui/material";
+import Image from "next/image";
+import { Grid, Box, Typography, Stack } from "@mui/material";
 import Gallery from "../components/Gallery";
 
 function Index() {
@@ -51,7 +52,7 @@ function Index() {
         </Grid>
         <Grid item xs={12} md={6}>
           <Box>
-            <img className="h-full w-full object-cover" src="https://user-images.githubusercontent.com/1500684/157774694-99820c51-8165-4908-a031-34fc371ac0d6.jpg" alt="Sonic Youth On Stage" />
+            <Image className="h-full w-full object-cover" src="https://user-images.githubusercontent.com/1500684/157774694-99820c51-8165-4908-a031-34fc371ac0d6.jpg" alt="Sonic Youth On Stage" />
           </Box>
         </Grid>
       </Grid>

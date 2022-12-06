@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Grid, Container, Stack, Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import Image from "next/image"
 
 type CommonProps = {
   imgsrc: string;
@@ -59,7 +60,7 @@ function Common(props: CommonProps) {
 
           <Grid item xs={12} md={6}>
             <Box sx={{p: 6,}}>
-              <img src={imgsrc} width={'100%'} height={'100%'} alt="Image" />
+              <Image src={imgsrc} alt="Image" />
             </Box>
           </Grid>
         </Grid> 
