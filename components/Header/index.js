@@ -16,9 +16,10 @@ const pages = ["Home", "Upload", "Gallery"];
 
 function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  // const [active, setActive] = React.useState(null);
 
   const {
+    isAuthenticated,
+    account,
     setMessage,
     setaccount,
     setPageIndex,
@@ -109,7 +110,13 @@ function Header(props) {
               </Button>
             ))}
           </Box>
-          <ConnectAccount setaccount={setaccount} setMessage={setMessage} setIsAuthentication={setIsAuthentication}/>
+          <ConnectAccount 
+            isAuthenticated={isAuthenticated}
+            setMessage={setMessage} 
+            account={account}
+            setAccount={setaccount} 
+            setIsAuthentication={setIsAuthentication}
+          />
         </Toolbar>
       </Container>
     </AppBar>

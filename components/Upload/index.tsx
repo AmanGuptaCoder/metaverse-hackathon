@@ -13,7 +13,6 @@ import { contractAddress, abi } from "../abi";
 import Web3 from "web3";
 import sendtransaction from "../apis"
 import BoxesLoader from "../loaders/BoxesLoader"
-import BasicAlerts from "../BasicAlerts"
 
 const styled = {
   border: "none",
@@ -26,13 +25,8 @@ const theme = createTheme();
 
 type UploadProps = {
   setPageIndex: (x:number) => void;
-  setIsUploaded: (x:boolean) => void;
-  setInProgress: (x:boolean) => void;
   setMessage: (x:string) => void;
   currentPageIndex: number;
-  isUploaded: boolean;
-  inProgress: boolean;
-  message: string;
 }
 
 export default function Upload(props: UploadProps) {
@@ -40,17 +34,12 @@ export default function Upload(props: UploadProps) {
   const [id, setId] = React.useState(0);
   const [artist, setArtist] = React.useState("");
   const [title, setTitle] = React.useState("");
+  const [inProgress, setInProgress] = React.useState(false);
+  const [isUploaded, setIsUploaded] = React.useState(false);
 
-  const {
-    isUploaded, 
-    setPageIndex, 
-    currentPageIndex, 
-    setIsUploaded, 
-    setInProgress, 
-    setMessage,
-    inProgress,
-    message } = props;
-  const { sendTransaction, readData } = sendtransaction();
+  const { setPageIndex,  currentPageIndex,  setMessage } = props;
+
+  const { sendTransaction } = sendtransaction();
 
   React.useEffect(() => {
     if (isUploaded) {
@@ -71,9 +60,8 @@ export default function Upload(props: UploadProps) {
   const handleTitle = (e: {target : {value: string}}) => {
     setTitle(e.target.value);
   };
-  // event: React.FormEvent<HTMLFormElement>
+
   const handleSubmit = async () => {
-    // if(!isAuthenticated) alert ("Please connect wallet");
     if (!artist) alert("Please set Artist name");
     if (!title) alert("Please set title");
     setInProgress(true);
@@ -96,9 +84,7 @@ export default function Upload(props: UploadProps) {
       fileHash: fileHash
     });
 
-    if (result) {
-      setIsUploaded(true);
-    }
+    setIsUploaded(true);
     setInProgress(false);
     setTrigger(!trigger);
   };
@@ -106,7 +92,6 @@ export default function Upload(props: UploadProps) {
   return (
     <ThemeProvider theme={theme}>
       <Grid container spacing={2}>
-        <BasicAlerts message={message} messageType="success" />
         {!inProgress && (
           <Grid item xs={12} md={isUploaded ? 6 : 12}>
             <Container

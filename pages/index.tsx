@@ -7,6 +7,7 @@ import Home from "../components/Home";
 import Upload from "../components/Upload";
 import Gallery from "../components/Gallery";
 import BigNumber from "bignumber.js";
+import Notification from '../components/Notification';
 
 type ListObject = {
   dateUploaded: BigNumber;
@@ -45,14 +46,9 @@ function Index(props: IndexProps) {
     updatePoolList={updatePoolList}
   />, 
   <Upload
-    isUploaded={isUploaded}
-    setIsUploaded={setUploaded}
     setPageIndex={setpageIndex} 
     setMessage={setmessage} 
     currentPageIndex={currentPageIndex}
-    setInProgress={setinprogress}
-    message={message}
-    inProgress={inProgress}
   />, 
   <Gallery 
     setInProgress={setinprogress} 
@@ -60,7 +56,11 @@ function Index(props: IndexProps) {
     updatePoolList={updatePoolList} />
   ];
 
-  return <main >{currentPage}</main>;
+  return ( <main >
+    <Notification message={message} />
+    {currentPage}
+  </main>
+  );
 }
 
 export default Index;

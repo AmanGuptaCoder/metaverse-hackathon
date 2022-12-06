@@ -1,11 +1,25 @@
 import React from 'react'
 import Header from '../Header'
 export default function Layout(props) {
-  const { setaccount, setMessage, setPageIndex, setIsAuthentication, children} = props;
+  const {
+    isAuthenticated,
+    account,
+    setMessage, 
+    setaccount, 
+    setPageIndex, 
+    setIsAuthentication, 
+    children } = props;
   return (
     <div>
         <div className='w-full'>
-            <Header setaccount={setaccount} setMessage={setMessage} setPageIndex={setPageIndex} setIsAuthentication={setIsAuthentication} />
+            <Header
+              isAuthenticated={isAuthenticated}
+              account={account}
+              setMessage={setMessage} 
+              setaccount={setaccount} 
+              setPageIndex={setPageIndex} 
+              setIsAuthentication={setIsAuthentication} 
+              />
             <div>
                 {children}
             </div>

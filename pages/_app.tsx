@@ -20,7 +20,14 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <React.Fragment>
-      <Layout setaccount={setaccount} setMessage={setmessage} setPageIndex={setPageIndex} setIsAuthentication={setIsAuthentication} >
+      <Layout 
+        isAuthenticated={isAuthenticated}
+        account={account}
+        setMessage={setmessage} 
+        setaccount={setaccount} 
+        setPageIndex={setPageIndex} 
+        setIsAuthentication={setIsAuthentication}
+      >
         <Component 
           {...pageProps} 
           setpageIndex={setpageIndex} 

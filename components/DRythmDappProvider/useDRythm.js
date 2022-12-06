@@ -23,7 +23,12 @@ async function connect(setAccount, setMessage) {
 }
 export function useDRythm() {
   return {
-      authenticate: async function requestPermissions(setAccount, setMessage, setIsAuthenticated) {
+      authenticate: async function requestPermissions(
+        setAccount, 
+        setMessage, 
+        setIsAuthenticated
+        ) 
+      {
         let account;
         await window.ethereum
           .request({
@@ -34,14 +39,11 @@ export function useDRythm() {
            
             const accountsPermission = permissions.find(permission => permission.parentCapability === "eth_accounts");
             if (accountsPermission) {
-              await window.ethereum._metamask.isUnlocked().then(isUnlocked => setEnable(isUnlocked));
+              await window.ethereum._metamask.isUnlocked().then(isUnlocked => setIsAuthenticated(isUnlocked));
               await window.ethereum
               .request({ method: "eth_requestAccounts" })
               .then(newAccounts => {
                 account = newAccounts[0];
-                if(account) {
-                  setIsAuthenticated(true);
-                }
                 setAccount(newAccounts[0]);
                 setMessage(`Selected account:${newAccounts[0]}`)
               })
