@@ -1,16 +1,39 @@
 # BUilt for the Encodeclub Metaverse Hackathon
 
-# Project Name: DRythm
-# Author: Isaac J. 
-  - Fullstack developer.
+## Project Name:
+- DRythm
 
-# Team size: 1
+## Author: 
+- Isaac J. 
+  - Solidity/Web3 developer.
+  - Frontend dev.
+  - Ambassador
 
------------------------
+## Team size: 1
 
 # Project description
 
-DRythm is decentralized platform for sharing music i.e uploading and downloading musics. It is permissionless platform that brings music sharing onto the blockchain. Users are able to access the platform via their wallet addresses and pay for the service in the platform token - *"RYM"*. 
+DRythm is decentralized platform for sharing music i.e uploading and downloading musics built for the love for Web3 and Polygon. It is permissionless platform that brings music sharing onto the blockchain. Users are able to access the platform via their wallet addresses and pay for the service in the platform token - *"RYM"*.
+
+## RYM Token
+A native utility Token of the DRythm platform that gives holders full access to the platform.
+- Model
+  - ERC20 Standard
+  - Burnable
+  Name: 
+    - RYM Token
+  
+  Decimals:
+    - 18
+
+  Symbols:
+    - RYM
+
+  Total Supply:
+    - 50_000_000
+
+  Type:
+    - Deflationary
 
 ## How it works
 There are basically two types of users: 
