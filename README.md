@@ -37,6 +37,53 @@ I found an answer while brainstorming. Blockchain is perfect for this. With its 
 -----------------------
 
 # Technology used
+Amidst of numerous blockchain networks, I selected Polygon for its cheaper gas cost and scalability so that when the platform starts gaining more people, it would be able to absorb traffic.
+
+# Stack used
+### Smart contract:
+- Language
+  - Solidity
+
+- Web3 Tools
+  - Hardhat
+  - Typescript
+
+- Frontend: 
+  - NextJs
+  - MaterialUI
+  - Reactjs
+  - Typescript
+
+# How to run the application
+To compile and test contract:
+
+- Git clone https://github.com/bobeu/metaverse-hackathon.git
+- cd metaverse-hackathon/backend
+- yarn install
+
+### compile
+```
+npx hardhat compile
+
+```
+
+### test
+```
+mpx hardhat test
+
+```
 
 
-Video: https://youtu.be/mbzbTWRRnWE
+To run frontend, in the same project directory, or if you're in the backend folder, `cd ..`.
+
+```
+yarn install
+
+```
+
+```
+yarn run dev
+
+```
+
+Video demonstration: **[Youtube](https://youtu.be/mbzbTWRRnWE)**
