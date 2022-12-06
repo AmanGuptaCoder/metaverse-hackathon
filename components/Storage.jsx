@@ -1,11 +1,11 @@
 import * as React from "react";
   
-const defaultAccount = `0xA7B2387bF4C259e188751B46859fcA7E2043FEFD`;
+const defaultAccount = `0x${'0'.repeat(40)}`;
 
   const Context = React.createContext({
     message: "",
     setMessage: (value) => {},
-    account : `0x${'0'.repeat(40)}`,
+    account : defaultAccount,
     setAccount: (value) => {},
     isAuthenticated: false,
     setIsAuthenticated: (value) => {},
@@ -32,8 +32,6 @@ function Provider (props) {
     }
   }>{ children }</Context.Provider>
 }
-
-// Context.displayName = Storage;
 export const useAppContext = () => React.useContext(Context);
 export const withProvider = (Component) => {
   return (props) => {

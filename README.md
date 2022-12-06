@@ -75,6 +75,12 @@ Amidst of numerous blockchain networks, I selected Polygon for its cheaper gas c
   - Reactjs
   - Typescript
 
+- File management
+  - IPFS
+
+- Deployment
+  - Vercel
+
 # How to run the application
 To compile and test contract:
 
