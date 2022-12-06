@@ -3,63 +3,64 @@ import { Divider, Button, Container } from "@mui/material";
 import Link from "next/link";
 import Image from "next/image";
 import { Grid, Box, Typography, Stack } from "@mui/material";
+import Home from "../components/Home";
+import Upload from "../components/Upload";
 import Gallery from "../components/Gallery";
+import BigNumber from "bignumber.js";
 
-function Index() {
+type ListObject = {
+  dateUploaded: BigNumber;
+  downloadCount: BigNumber;
+  uploader: string;
+}
 
-  return (
-    <main className="relative min-h-screen bg-white sm:flex sm:items-center sm:justify-center">
-      <Grid container>
-        <Grid item xs={12} md={6}>
-          <Stack>
-            <Container maxWidth="sm">
-              <Typography variant="h3" gutterBottom fontWeight="bold" color="purple" sx={{ mt: 4 }}>
-                {" "}
-                Decentralized Music gallery powered by Polygon{" "}
-              </Typography>
-              <Typography paragraph sx={{ fontSize: "16px", fontWeight: "bold" }}>
-                Access and download old and latest music of your choice.
-              </Typography>
-              <div className="container">
-                <ul>
-                  <Typography>No credit card hassle</Typography>
-                  <Typography>Secure download and file integrity</Typography>
-                  <Typography>Earn each time your music is downloaded</Typography>
-                  <Typography>Access high quality music at extremely cheaper fee</Typography>
-                </ul>
-              </div>
-              <Divider />
-              <Button
-                variant="outlined"
-                sx={{
-                  height: "58px",
-                  width: "50%",
-                  mt: 2,
-                  background: "none",
-                  borderColor: "purple",
-                  "&:hover": {
-                    transition: "0.2s ease-in-out",
-                    zIndex: "1",
-                    color: "purple",
-                    background: "stone"
-                  }
-                }}
-              >
-                <Link href={"/upload"}>Upload</Link>
-              </Button>
-            </Container>
-          </Stack>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Box>
-            <Image className="h-full w-full object-cover" src="https://user-images.githubusercontent.com/1500684/157774694-99820c51-8165-4908-a031-34fc371ac0d6.jpg" alt="Sonic Youth On Stage" />
-          </Box>
-        </Grid>
-      </Grid>
-      <Divider />
-      <Gallery />
-    </main>
-  );
+type IndexProps = {
+  setpageIndex: (x:number) => void;
+  currentPageIndex: number;
+  setmessage: (x:string) => void;
+  message: string;
+}
+
+function Index(props: IndexProps) {
+  const [inProgress, setInProgress] = React.useState(false);
+  const [isUploaded, setIsUploaded] = React.useState(false);
+  const [currentPage, setPage] = React.useState(<></>);
+
+  const { currentPageIndex, setpageIndex, setmessage, message} = props;
+ 
+  const [poolList, updatePoolList] = React.useState(Array<ListObject>);
+
+  React.useEffect(() => {
+    return setPage(PAGES[currentPageIndex]);
+  }, [currentPageIndex]);
+
+  const setUploaded = (value: boolean) => setIsUploaded(value);
+  const setinprogress = (value: boolean) => setInProgress(value);
+
+  const PAGES = [
+  <Home 
+    setpageIndex={setpageIndex} 
+    setmessage={setmessage} 
+    setInProgress={setinprogress} 
+    updatePoolList={updatePoolList}
+  />, 
+  <Upload
+    isUploaded={isUploaded}
+    setIsUploaded={setUploaded}
+    setPageIndex={setpageIndex} 
+    setMessage={setmessage} 
+    currentPageIndex={currentPageIndex}
+    setInProgress={setinprogress}
+    message={message}
+    inProgress={inProgress}
+  />, 
+  <Gallery 
+    setInProgress={setinprogress} 
+    setMessage={setmessage} 
+    updatePoolList={updatePoolList} />
+  ];
+
+  return <main >{currentPage}</main>;
 }
 
 export default Index;

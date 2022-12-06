@@ -2,7 +2,6 @@ import { CSSProperties, useEffect } from "react";
 import { useState } from "react";
 import { getEllipsisTxt } from "./helpers/formatters";
 import Blockie from "./Blockie";
-// import { useMoralis } from "react-moralis";
 
 const styles = {
   pointer: {

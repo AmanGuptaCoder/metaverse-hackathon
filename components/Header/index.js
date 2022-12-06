@@ -12,12 +12,17 @@ import ConnectAccount from "../ConnectAccount";
 import MenuItem from "@mui/material/MenuItem";
 import Link from "next/link";
 
-const pages = ["Home", "Upload", "Categories"];
-const destination = ["/", "/upload", "/rnb", "/hiphop", "gospel"];
+const pages = ["Home", "Upload", "Gallery"];
 
-function Header() {
+function Header(props) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [active, setActive] = React.useState(null);
+  // const [active, setActive] = React.useState(null);
+
+  const {
+    setMessage,
+    setaccount,
+    setPageIndex,
+    setIsAuthentication } = props;
 
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
@@ -70,11 +75,11 @@ function Header() {
             >
               {pages.map((page, id) => (
                 <MenuItem key={id}>
-                  <Link className="btn" href={destination[id]} style={{ border: "none" }}>
-                    <Typography textAlign="center" sx={{ color: "purple" }}>
+                  <Button onClick={() => setPageIndex(id)} variant='text' >
+                    {/* <Typography textAlign="center" sx={{ color: "purple" }}> */}
                       {page}
-                    </Typography>
-                  </Link>
+                    {/* </Typography> */}
+                  </Button>
                 </MenuItem>
               ))}
             </Menu>
@@ -99,16 +104,12 @@ function Header() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex", justifyContent: "flex-start", gap: 4 } }}>
             {pages.map((page, id) => (
-              <Button key={id}>
-                <Link href={destination[id]}>
-                  <Typography textAlign="center" sx={{ color: "purple" }}>
-                    {page}
-                  </Typography>
-                </Link>
+              <Button onClick={() => setPageIndex(id)} key={id} sx={{ color: "purple" }}>
+                {page}
               </Button>
             ))}
           </Box>
-          <ConnectAccount />
+          <ConnectAccount setaccount={setaccount} setMessage={setMessage} setIsAuthentication={setIsAuthentication}/>
         </Toolbar>
       </Container>
     </AppBar>

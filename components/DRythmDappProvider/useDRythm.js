@@ -1,11 +1,29 @@
 import React from "react";
-import { useAppContext } from "../Storage";
 
+async function connect(setAccount, setMessage) {
+  let account;
+  window.document.getElementById("connectButton", connect);
+  await window.ethereum
+    .request({ method: "eth_requestAccounts" })
+    .then(newAccounts => {
+      account = newAccounts[0];
+      if (wallet !== newAccounts[0]) {
+        setAccount(newAccounts[0]);
+        setMessage(`Selected account:${newAccounts[0]}`)
+      }
+    })
+    .catch(error => {
+      if (error.code === 4001) {
+        // EIP-1193 userRejectedRequest error
+        setMessage("Please connect to MetaMask.")
+      } else {
+        console.error(error);
+      }
+    });
+}
 export function useDRythm() {
-  const { setIsAuthenticated, setMessage, setAccount, setEnable } = useAppContext();
-
   return {
-      authenticate: async function requestPermissions() {
+      authenticate: async function requestPermissions(setAccount, setMessage, setIsAuthenticated) {
         let account;
         await window.ethereum
           .request({
@@ -21,6 +39,9 @@ export function useDRythm() {
               .request({ method: "eth_requestAccounts" })
               .then(newAccounts => {
                 account = newAccounts[0];
+                if(account) {
+                  setIsAuthenticated(true);
+                }
                 setAccount(newAccounts[0]);
                 setMessage(`Selected account:${newAccounts[0]}`)
               })
@@ -34,10 +55,11 @@ export function useDRythm() {
               });
     
               setMessage('Permission granted!')
-              return account;
+              
             } else {
-              await connect(setAccount, setMessage);
+              account = await connect(setAccount, setMessage);
             }
+
           })
           .catch(error => {
             // if (error.code === 4001) {
@@ -46,8 +68,9 @@ export function useDRythm() {
             setMessage("Permissions needed to continue.");
             console.error(error);
           });
+        return account;
       },
-      enableWeb3: async function connect() {
+      enableWeb3: async function connect(setAccount, setMessage) {
         window.document.getElementById("connectButton", connect);
         await window.ethereum
           .request({ method: "eth_requestAccounts" })
@@ -91,19 +114,7 @@ export function useDRythm() {
         }
         return done;
       },
-      chainMenu: {
-        "0x61": {
-          chainId: "0x61",
-          chainName: "BSC Testnet",
-          rpcUrls: ["https://data-seed-prebsc-1-s1.binance.org:8545/"]
-        },
-        "0x13881": {
-          chainId: "0x13881",
-          chainName: "Polygon Mumbai",
-          rpcUrls: ["https://api.s0.b.hmny.io"]
-        },
-      
-      },
+      connect,
 
   }
 

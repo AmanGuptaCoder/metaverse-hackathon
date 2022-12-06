@@ -9,16 +9,10 @@ import {
   Typography, 
   CardContent, } from '@mui/material';
 
-import { useAppContext } from '../Storage';
 import BigNumber from "bignumber.js"
-
-import Link from 'next/link';
-// import { useMoralis } from 'react-moralis';
 import Web3 from 'web3';
 import { contractAddress, abi } from "../abi";
 import sendtransaction from "../apis";
-
-// import { abi, address } from "../../backend/deployments/matic/DRythm.json";
 
 type CollectionType = {
   artist : string;
@@ -32,12 +26,19 @@ type ListObject = {
   uploader: string;
 }
 
-const Gallery = () => {
+
+type GalleryProps  = {
+  setInProgress: (x:boolean) => void;
+  setMessage: (x:string) => void;
+  poolList?: Array<ListObject>;
+  updatePoolList: Function;
+}
+
+const Gallery = (props: GalleryProps) => {
   const [ collections, setCollections ] = React.useState(IMAGES);
   const { sendTransaction, readData } = sendtransaction();
-  const [poolList, updatePoolList] = React.useState(Array<ListObject>);
 
-  const { setInProgress, setMessage } = useAppContext();
+  const { setInProgress, setMessage, updatePoolList } = props;
 
   React.useEffect(() => {
     const _fetchData = async() => {
@@ -67,7 +68,7 @@ const Gallery = () => {
 
   return (
     <div className='team flex flex-col justify-center items-center py-12 px-16'>
-      <Typography variant='h5' sx={{color:'purple', pb: 2}}>Gallery</Typography>
+      <Typography variant='h5' sx={{color:'white', pb: 2}}>Gallery</Typography>
       <Grid container spacing={2}>
         {
           collections.map((items: CollectionType, id: number) => (
